@@ -3,9 +3,10 @@
  * @Author: juneChen && juneswoole@163.com
  * @Date: 2023-07-14 14:35:05
  * @LastEditors: juneChen && juneswoole@163.com
- * @LastEditTime: 2023-07-14 14:52:37
+ * @LastEditTime: 2023-07-14 15:45:14
  * 
  */
+
 declare(strict_types=1);
 
 namespace June\JWT;
@@ -62,7 +63,7 @@ class JwtValidate
             throw new JwtException('The encryption mode does not support');
         }
         $encryption = new $class();
-        if ($encryption->verify($signature, $payload, $config->getKey())) {
+        if (!$encryption->verify($signature, $payload, $config->getKey())) {
             throw new JwtException('Token signature error');
         }
         return true;
